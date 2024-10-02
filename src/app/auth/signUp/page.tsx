@@ -1,0 +1,129 @@
+"use client";
+import React from "react";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
+import {
+  IconBrandGithub,
+  IconBrandGoogle,
+  IconBrandOnlyfans,
+} from "@tabler/icons-react";
+import {useRouter} from "next/navigation";
+
+export default function page() {
+    const router = useRouter();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Form submitted");
+  };
+
+  const handleClick = (e:any) => {
+    e.preventDefault();
+    router.push('/auth/signIn')
+  }
+
+  const handleDashboard = (e:any) => {
+    e.preventDefault();
+    router.push('/home')
+  }
+
+  return (
+    <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-primary h-[100vh] md:h-fit md:mt-[8vh]">
+      <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
+        Welcome to College Review
+      </h2>
+      
+
+      <form className="my-8" onSubmit={handleSubmit}>
+        <div className="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2 mb-4">
+          <LabelInputContainer >
+            <Label htmlFor="firstname">First name</Label>
+            <Input id="firstname" placeholder="Tyler" type="text" className="bg-secondary text-accent"/>
+          </LabelInputContainer>
+          <LabelInputContainer>
+            <Label htmlFor="lastname">Last name</Label>
+            <Input id="lastname" placeholder="Durden" type="text" className="bg-secondary text-accent"/>
+          </LabelInputContainer>
+        </div>
+        <LabelInputContainer className="mb-4">
+          <Label htmlFor="email">Email Address</Label>
+          <Input id="email" placeholder="projectmayhem@fc.com" type="email" className="bg-secondary text-accent"/>
+        </LabelInputContainer>
+        <LabelInputContainer className="mb-4">
+          <Label htmlFor="password">Password</Label>
+          <Input id="password" placeholder="••••••••" type="password" className="bg-secondary text-accent"/>
+        </LabelInputContainer>
+        
+        <button
+          className="bg-gradient-to-br relative group/btn from-primary dark:from-zinc-900 dark:to-zinc-900 to-secondary block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+          type="submit"
+          onClick={handleDashboard}
+        >
+          Sign up &rarr;
+          <BottomGradient />
+        </button>
+
+        <div className="bg-gradient-to-r from-transparent via-neutral-300 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
+
+        <div className="flex flex-col space-y-4 bg-primary">
+          <button
+            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-secondary rounded-md h-10 font-medium shadow-input bg-secondary dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+            type="submit"
+          >
+            <IconBrandGithub className="h-4 w-4 text-accent" />
+            <span className="text-accent text-sm">
+              GitHub
+            </span>
+            <BottomGradient />
+          </button>
+          <button
+            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-secondary dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+            type="submit"
+          >
+            <IconBrandGoogle className="h-4 w-4 text-accent" />
+            <span className=" text-accent text-sm">
+              Google
+            </span>
+            <BottomGradient />
+          </button>
+          <button
+            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-black rounded-md h-10 font-medium shadow-input bg-secondary dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
+            type="submit"
+          >
+            <IconBrandOnlyfans className="h-4 w-4 text-accent" />
+            <span className="text-accent text-sm">
+              OnlyFans
+            </span>
+            <BottomGradient />
+          </button>
+        </div>
+      </form>
+      <p className="text-sm max-w-sm mt-2 text-accent">
+       Already have an Account ? <button onClick={handleClick} className="underline text-secondary"> Sign In</button>
+      </p>
+    </div>
+  );
+}
+
+const BottomGradient = () => {
+  return (
+    <>
+      <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
+      <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-transparent via-indigo-500 to-transparent" />
+    </>
+  );
+};
+
+const LabelInputContainer = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <div className={cn("flex flex-col space-y-2 w-full", className)}>
+      {children}
+    </div>
+  );
+};
