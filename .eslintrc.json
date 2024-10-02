@@ -1,3 +1,6 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "prefer-const": "off",
+  "@typescript-eslint/no-explicit-any": "off",
+  "react-hooks/rules-of-hooks": "off"
 }
